@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/img/icon.png">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Zilla+Slab&display=swap" rel="stylesheet">
+    <title>{% block metatitle %}{% endblock %} | Aurum Academy</title>
+  </head>
+
+  <body class='flex-column'>
+
+    <div class='flex-header'>
+        <span class='title'>
+            {% block title %}{% endblock %}
+        </span>
+    </div>
+    <div class='flex-body'>
+      <div id='text'></div>
+      {% block content %}{% endblock %}
+    </div>
+
+  </body>
+
+  {% block scripts %}{% endblock %}
+ 
+</html>

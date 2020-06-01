@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block metatitle %}
+Driver Station
+{% endblock %}
+
+{% block title %}
+Robot Driver Station
+{% endblock %}
+
+{% block content %}
+<div id='controller'>
+  <div id='joystick'>
+    <span>drive</span>
+  </div>
+  <div id='button'>
+    <span>shoot</span>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script src='/js/lib/jquery.min.js'></script>
+  <script src='/js/lib/joystick.min.js'></script>
+  <script src='/js/lib/eventemitter.min.js'></script>
+  <script src='/js/helpers.js'></script>
+  <script src='/js/stages.js'></script>
+  <script src='/js/robot-client.js'></script>
+  <script src='/js/driver-station.js'></script>
+{% endblock %}
