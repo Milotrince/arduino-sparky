@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 
 {% block metatitle %}
-My Code
+Home
 {% endblock %}
 
 {% block title %}
-My Code
+Home
+{% endblock %}
+
+{% block nav %}
 {% endblock %}
 
 {% block content %}
@@ -13,12 +16,7 @@ My Code
 
 {% block scripts %}
   <script src='/js/lib/jquery.min.js'></script>
-  <script src='/js/lib/eventemitter.min.js'></script>
   <script src='/js/helpers.js'></script>
-  <script src='/js/stages.js'></script>
   <script src='/js/connect-check.js'></script>
-  <script src='/js/robot-client.js'></script>
-  <script src='/js/mycode-base.js'></script>
-  <script src='/{{ filename }}'></script>
-  <script src='/js/mycode-runner.js'></script>
+  <script src='/js/home.js'></script>
 {% endblock %}

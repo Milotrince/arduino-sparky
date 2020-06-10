@@ -20,30 +20,10 @@ let lastMoveTime = new Date()
 let data = { x: 0, y: 0, shooting: false }
 stages = [
   {
-    text: "Hello! This is our robot controller. (press enter)",
-    type: true,
-    input: true,
-    action: function() {
-      nextStage()
-    }
-  },
-  {
-    text: "Is the computer connected to bluetooth with the robot? (y/n)",
-    type: true,
-    input: true,
-    action: function(input) {
-      if (input.toLowerCase().includes('y')) {
-        nextStage()
-      } else {
-        presentStage()
-      }
-    }
-  },
-  {
     text: "Connecting...",
     type: true,
     input: false,
-    action: function(input) {
+    action: function() {
       robot.connect()
     }
   },
@@ -82,7 +62,7 @@ function createJoystick() {
   })
   joystick.on('end', function(event, data) {
     setDataText({x:0, y:0})
-    robot.move(0, 0)
+    robot.drive(0, 0)
   })
   joystick.on('move', function(event, data) {
     let x = Math.cos(data.angle.radian)
@@ -90,7 +70,7 @@ function createJoystick() {
     setDataText({x, y})
     let now = new Date()
     if (now - lastMoveTime > 100) {
-      robot.move(x, y)
+      robot.drive(x, y)
       lastMoveTime = now
     }
   })
@@ -107,7 +87,6 @@ function showController() {
     setDataText({shooting:true})
   })
   $('#button').on('mouseup touchend', function() {
-    console.log('touchend')
     robot.stopShoot()
     setDataText({shooting:false})
   })

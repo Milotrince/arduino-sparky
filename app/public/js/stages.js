@@ -19,7 +19,7 @@ async function type(text) {
       typed += c
     }
     setText(typed)
-    await sleep(40)
+    await sleep(30)
   }
 }
 

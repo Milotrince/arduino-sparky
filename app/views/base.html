@@ -11,14 +11,22 @@
 
   <body class='flex-column'>
 
-    <div class='flex-header'>
-        <span class='title'>
-            {% block title %}{% endblock %}
-        </span>
+    <div class='flex-header nav'>
+      <div class='nav-left'>
+        {% block nav %}
+          <a href='/' class='nav-item' id='home' aria-label='Home'><</a>
+        {% endblock %}
+      </div>
+      <div class='nav-center title'>
+          {% block title %}{% endblock %}
+      </div>
+      <div class='nav-right'>
+      </div>
     </div>
     <div class='flex-body'>
+      {% block content %}
+      {% endblock %}
       <div id='text'></div>
-      {% block content %}{% endblock %}
     </div>
 
   </body>

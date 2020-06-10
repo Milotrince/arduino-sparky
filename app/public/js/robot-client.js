@@ -16,18 +16,23 @@ class Robot extends EventEmitter3 {
         console.error(data.error)
       }
     })
+
+    this.shooter = this._motor('shooter')
+    this.left = this._motor('left')
+    this.right = this._motor('right')
+
   }
 
-  move(x, y) {
+  drive(x, y) {
     if (!this.isReady) {
       this.emit('warn', {message: 'tried robot command while robot is not connected'})
       return
     }
-    this._post('command/move', {x, y}, 'move')
+    this._post('/robot/move', {x, y}, 'move')
   }
 
   connect(port) {
-    this._post('command/connect', {port}, 'connect')
+    this._post('/robot/connect', {port}, 'connect')
       .then(() => {
         this.isReady = true
       })
@@ -38,7 +43,7 @@ class Robot extends EventEmitter3 {
       this.emit('warn', {message: 'tried robot command while robot is not connected'})
       return
     }
-    this._post('command/shoot/start', {power}, 'startShoot')
+    this._post('/robot/shoot/start', {power}, 'startShoot')
   }
 
   stopShoot() {
@@ -46,13 +51,21 @@ class Robot extends EventEmitter3 {
       this.emit('warn', {message: 'tried robot command while robot is not connected'})
       return
     }
-    this._post('command/shoot/stop', {}, 'stopShoot')
+    this._post('/robot/shoot/stop', {}, 'stopShoot')
+  }
+
+  stop() {
+    if (!this.isReady) {
+      this.emit('warn', {message: 'tried robot command while robot is not connected'})
+      return
+    }
+    this._post('/robot/stop', {}, 'stop')
   }
 
   _motor(name) {
-    let motor = {
+    return {
       setPower: function(power) {
-        this._post('command/motor/power', {power}, 'setPower')
+        this._post('/robot/motor/power', {name, power}, 'setPower')
       }
     }
   }
@@ -68,16 +81,23 @@ class Robot extends EventEmitter3 {
     })
     .then((response) => {
       if (response.ok) {
-        // return response.json()
+        this.emit(event, {})
       } else {
         throw new Error('server responded with not ok')
       }
-    }).then((json) => {
-      // console.log(json)
-      this.emit(event, {})
     }).catch((error) => {
       this.emit('error', {error, message: 'failed at: '+event, event})
     }) 
   }
 
+}
+
+if ($('#home').length) {
+  $('#home').click(function(event) {
+    if (typeof(robot) !== 'undefined') {
+      event.preventDefault()
+      robot.stop()
+      window.location = '/'
+    }
+  })
 }
