@@ -13,7 +13,7 @@ router.post('/mycode', function(req, res, next) {
 
 router.post('/shutdown', function(req, res, next) {
     res.status(200).send('ok')
-    print('exiting...')
+    console.log('exiting...')
     process.exit(0)
 })
 

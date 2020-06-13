@@ -7,6 +7,7 @@ robot.on('error', (data) => {
 robot.on('connect', (data) => {
     nextStage()
 })
+let port = ''
 
 stages = [
   {
@@ -30,11 +31,24 @@ stages = [
     }
   },
   {
+    text: "Port? (leave blank to use default)",
+    type: true,
+    input: true,
+    action: function(input) {
+      port = input.trim()
+      nextStage()
+    }
+  },
+  {
     text: "Connecting...",
     type: true,
     input: false,
     action: function(input) {
-      robot.connect()
+      if (port.length > 0) {
+        robot.connect(port)
+      } else {
+        robot.connect()
+      }
     }
   },
   {
