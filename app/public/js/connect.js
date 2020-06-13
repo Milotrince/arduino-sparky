@@ -1,11 +1,10 @@
 let robot = new Robot()
 robot.on('error', (data) => {
   if (data.event == 'connect') {
-    nextStage()
+    window.location = '/disconnected'
   }
 })
 robot.on('connect', (data) => {
-    index++
     nextStage()
 })
 
@@ -39,26 +38,13 @@ stages = [
     }
   },
   {
-    text: "Failed to connect :(\nRestart the server, make sure everything is connected, and try again!",
-    type: true,
-    input: false,
-    action: function() { }
-  },
-  {
     text: "Connected! (press enter to go to home)",
     type: true,
     input: true,
     action: function() {
       window.location = '/'
-
     }
-  },
-  {
-    text: "Disconnected :(\nRestart the server, make sure everything is connected, and try again!",
-    type: true,
-    input: false,
-    action: function() { }
-  },
+  }
 ]
 
 presentStage()

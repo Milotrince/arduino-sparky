@@ -2,15 +2,16 @@ const router = require('express').Router()
 const robot = require('../../robot')
 
 router.post('/isready', function(req, res, next) {
+    res.status(200).json({ready: robot.ready})
+})
+
+router.post('/ping', function(req, res, next) {
     if (robot.ready) {
         robot.ping()
             .then(() => {
-                console.log('yay ping')
                 res.status(200).json({ready: true})
             }).catch(() => {
-                console.log('bad ping')
                 res.status(500).json({ready: false})
-                process.exit(1)
             })
     } else {
         res.status(200).json({ready: false})
@@ -26,7 +27,6 @@ router.post('/connect', function(req, res, next) {
             }).catch((error )=> {
                 console.log('critical error :(')
                 res.status(500).send(error)
-                process.exit(1)
             })
     } else {
         res.status(200).send('already connected')

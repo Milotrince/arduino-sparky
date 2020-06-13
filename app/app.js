@@ -36,6 +36,10 @@ app.get('/connect', (req, res) => {
     res.render('connect.html')
 })
 
+app.get('/disconnected', (req, res) => {
+    res.render('disconnected.html')
+})
+
 app.get('*', function(req, res){
     res.redirect('/')
   })

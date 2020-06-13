@@ -4,14 +4,12 @@ robot.on('error', (data) => {
     joystick.destroy()
     $('#controller').css('opacity', '0')
     $('#controller').css('pointer-events', 'none')
-    nextStage()
   }
-  else if (data.event == 'connect') {
-    nextStage()
+  if (data.event == 'connect') {
+    window.location = '/disconnected'
   }
 })
 robot.on('connect', (data) => {
-    index++
     nextStage()
 })
 
@@ -28,12 +26,6 @@ stages = [
     }
   },
   {
-    text: "Failed to connect :(\nRestart the server, make sure everything is connected, and try again!",
-    type: true,
-    input: false,
-    action: function() { }
-  },
-  {
     text: "Connected!",
     type: true,
     input: false,
@@ -41,14 +33,7 @@ stages = [
       createJoystick()
       showController()
     }
-  },
-  {
-    text: "Disconnected :(\nRestart the server, make sure everything is connected, and try again!",
-    type: true,
-    input: false,
-    action: function() { }
-  },
-
+  }
 ]
 
 

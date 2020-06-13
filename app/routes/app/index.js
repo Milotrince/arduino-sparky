@@ -11,4 +11,10 @@ router.post('/mycode', function(req, res, next) {
     })
 })
 
+router.post('/shutdown', function(req, res, next) {
+    res.status(200).send('ok')
+    print('exiting...')
+    process.exit(0)
+})
+
 module.exports = router

@@ -97,12 +97,10 @@ let robot = {
   },
 
   ping: (ms=3000) => {
-    console.log('ping?')
     return new Promise((resolve, reject) => {
       if (robot.ready) {
         setTimeout(reject, ms)
         robot._board.digitalRead(0, function(value) {
-          console.log('ping: '+value)
           resolve()
         })
       } else {

@@ -5,11 +5,6 @@ robot.connect()
     .then(async () => {
         console.log('connected!')
 
-        // robot._board.pinMode(0, five.Pin.INPUT)
-        // await new Promise
-        // robot._board.digitalRead(0, (value) => {
-        //     console.log(value)
-        // })
         await robot.ping()
 
         await robot._onExit()
