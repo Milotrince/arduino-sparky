@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
     res.render('home.html')
 })
 
+app.get('/welcome', (req, res) => {
+    res.render('welcome.html')
+})
+
 app.get('/mycode/:filename', (req, res) => {
     res.render('mycode.html', req.params)
 })
